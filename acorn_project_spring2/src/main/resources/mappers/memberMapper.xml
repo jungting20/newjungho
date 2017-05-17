@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	
+	<select id="login" resultType="memberDTO">
+ select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+'student' as classification
+from student where id = #{userid}
+union  
+select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+'manager' as classification
+from manager where id = #{userid}
+union
+select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+'teacher' as classification
+from teacher where id = #{userid}
+</select>
+	
+	
+</mapper>
