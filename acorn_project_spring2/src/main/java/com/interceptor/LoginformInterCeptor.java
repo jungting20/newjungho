@@ -36,8 +36,8 @@ public class LoginformInterCeptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		
 		Cookie logincookie = WebUtils.getCookie(request, "logincookie");
-		log.info("로그인폼 프리핸들러 실행"+"\t"+logincookie.getValue());
 		if(logincookie != null){
+			log.info("로그인폼 프리핸들러 실행"+"\t"+logincookie.getValue());
 			HttpSession session = request.getSession();
 			String cookieval=logincookie.getValue();
 			log.info("getcookie!");

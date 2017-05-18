@@ -31,6 +31,7 @@
 	<beans:bean id="basicinterceptor" class="com.interceptor.BasicInterCeptor"/>
 	<beans:bean id="loginInterceptor" class="com.interceptor.LoginInterCeptor" />
 	<beans:bean id="loginformInterceptor" class="com.interceptor.LoginformInterCeptor"/>
+	<beans:bean id="LoginAuthInterceptor" class="com.interceptor.LoginAuthInterCeptor"/>
 	
 	<mvc:interceptors>
 	<mvc:interceptor>
@@ -45,8 +46,10 @@
 		<mvc:mapping path="/member/loginform"/>
 		<beans:ref bean="loginformInterceptor"/>
 	</mvc:interceptor>
-		
-	
+		<mvc:interceptor>
+		<mvc:mapping path="/member/doattend"/>
+		<beans:ref bean="LoginAuthInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 </beans:beans>

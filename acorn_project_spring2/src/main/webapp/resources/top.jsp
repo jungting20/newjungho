@@ -108,7 +108,7 @@
 				
 				<br>
 				<c:if test="${login != null && (login.classification == 'manager' || login.classification == 'teacher') }">
-				<a href="/temp/member/logout" class="btn btn-warning"
+				<a href="/test/member/logout" class="btn btn-warning"
 					role="button">로그아웃</a> 
 				</c:if> 
 					<a href="/temp/member/doattend?logout=로그아웃"

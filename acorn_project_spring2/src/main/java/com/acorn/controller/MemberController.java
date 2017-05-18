@@ -44,7 +44,14 @@ public class MemberController {
 	public String logout(HttpSession session){
 		session.invalidate();
 		
-		return "loginform";
+		return "member/loginform";
+	}
+	@RequestMapping("doattend")
+	public String doattend(){
+		//course 는 레지스터에있음 조인해서 코스아이디 얻어오고 student_id는 세션에서 얻어오고
+		//student_id,course_id,tag_time,course_date
+		//jsp 폴더에서 뷰 가져다가 넣어주고 리턴값 그걸로 해주면 끝 
+		return null;
 	}
 
 }

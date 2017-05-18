@@ -12,23 +12,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript">
-	/* $(document).ready(function(){
-	
-	 var id = $("#id").val()
-	 var pw = $("#pw").val()
-	
-	 $("#sumbit").on("click",function(){
-	 if(id==null || id =="" || pw==null || pw==""){
-	 console.log('되니');
-	 alert('빈칸채우세요');
-	 return false;
-	 }	
-	
-	 });
-	
-	
-
-	 }); */
+	var msg = '${msg}';
+	if(msg != null && msg !=''){
+		alert(msg);
+	}
 </script>
 <div class="container">
 	<h2>출석</h2>
