@@ -29,19 +29,23 @@
 	
 	
 	<beans:bean id="basicinterceptor" class="com.interceptor.BasicInterCeptor"/>
-	
-	
+	<beans:bean id="loginInterceptor" class="com.interceptor.LoginInterCeptor" />
+	<beans:bean id="loginformInterceptor" class="com.interceptor.LoginformInterCeptor"/>
 	
 	<mvc:interceptors>
 	<mvc:interceptor>
-		<mvc:mapping path="/member/**"/>
+		<mvc:mapping path="/**"/>
 		<beans:ref bean="basicinterceptor"/>
 	</mvc:interceptor>
 	<mvc:interceptor>
 		<mvc:mapping path="/member/login"/>	
-		<beans:bean id="loginInterceptor" class="com.interceptor.LoginInterCeptor" />
+		<beans:ref bean="loginInterceptor"/>
 	</mvc:interceptor>
-	
+	<mvc:interceptor>
+		<mvc:mapping path="/member/loginform"/>
+		<beans:ref bean="loginformInterceptor"/>
+	</mvc:interceptor>
+		
 	
 	</mvc:interceptors>
 	

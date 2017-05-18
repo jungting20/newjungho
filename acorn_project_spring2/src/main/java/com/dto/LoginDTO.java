@@ -5,18 +5,11 @@ public class LoginDTO {
 	
 	private String userid;
 	private String passwd;
+	private String isautologin;
 	
 	
 	
-	public LoginDTO(String userid, String passwd) {
-		super();
-		this.userid = userid;
-		this.passwd = passwd;
-	}
-	public LoginDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -29,6 +22,25 @@ public class LoginDTO {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
+	public String getIsautologin() {
+		return isautologin;
+	}
+	public void setIsautologin(String isautologin) {
+		this.isautologin = isautologin;
+	}
+	public LoginDTO(String userid, String passwd, String isautologin) {
+		super();
+		this.userid = userid;
+		this.passwd = passwd;
+		this.isautologin = isautologin;
+	}
+	public LoginDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 	
 	
 }

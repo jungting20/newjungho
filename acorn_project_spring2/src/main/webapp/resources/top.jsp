@@ -105,6 +105,11 @@
 
 				<h1>현재시간</h1>
 				<h1 id="clock"></h1>
-				<br> <a href="MemberLogout" class="btn btn-warning"
-					role="button">로그아웃</a> <a href="Doattend?logout=로그아웃"
+				
+				<br>
+				<c:if test="${login != null && (login.classification == 'manager' || login.classification == 'teacher') }">
+				<a href="/temp/member/logout" class="btn btn-warning"
+					role="button">로그아웃</a> 
+				</c:if> 
+					<a href="/temp/member/doattend?logout=로그아웃"
 					class="btn btn-warning" role="button">퇴실하기</a>

@@ -29,6 +29,7 @@ public class MemberController {
 	@RequestMapping(value="login",method=RequestMethod.POST)
 	public void login(LoginDTO dto,Model model,HttpSession session){
 		
+		
 		model.addAttribute("member",service.login(dto));
 		model.addAttribute("LoginDTO",dto);
 		
@@ -39,5 +40,11 @@ public class MemberController {
 		
 		
 	}
-	
+	@RequestMapping("logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		
+		return "loginform";
+	}
+
 }

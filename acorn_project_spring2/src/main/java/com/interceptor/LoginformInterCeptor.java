@@ -15,19 +15,18 @@ import org.springframework.web.util.WebUtils;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 
-public class BasicInterCeptor extends HandlerInterceptorAdapter{
+public class LoginformInterCeptor extends HandlerInterceptorAdapter{
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(BasicInterCeptor.class); 
+	private static Logger log = LoggerFactory.getLogger(LoginformInterCeptor.class);
 	
 	@Autowired
 	private MemberService service;
 	
+	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		log.info("====================end====================");
-		
 		
 		super.postHandle(request, response, handler, modelAndView);
 	}
@@ -36,12 +35,22 @@ public class BasicInterCeptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		log.info("=============start==============");
-		log.info("요청url"+"\t"+request.getRequestURI());
+		Cookie logincookie = WebUtils.getCookie(request, "logincookie");
+		log.info("로그인폼 프리핸들러 실행"+"\t"+logincookie.getValue());
+		if(logincookie != null){
+			HttpSession session = request.getSession();
+			String cookieval=logincookie.getValue();
+			log.info("getcookie!");
+			MemberDTO member = service.logincheck(cookieval);
+			log.info("before login user! success");
+			session.setAttribute("login", member);
+			response.sendRedirect("/test/member/loginsuccess");
+			return false;
+		}
 		
 		
-		log.info("전체적용 프리핸들러 끝");
-		return true;
+		
+		return super.preHandle(request, response, handler);
 	}
 	
 	

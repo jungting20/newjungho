@@ -29,6 +29,16 @@ public class MemberService {
 		return dao.login(dto);
 	}
 	
+	public void addsessionid(String memberid,String sessionid,String type){
+		
+		dao.addsessionid(memberid, sessionid, type);
+	}
+	
+	public MemberDTO logincheck(String cookieval){
+		
+		return dao.beforelogincheck(cookieval);
+	}
+	
 
 	
 	
