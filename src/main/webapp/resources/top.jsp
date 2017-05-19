@@ -107,9 +107,12 @@
 				<h1 id="clock"></h1>
 				
 				<br>
-				<c:if test="${login != null && (login.classification == 'manager' || login.classification == 'teacher') }">
+				<c:if test="${login != null}">
 				<a href="/test/member/logout" class="btn btn-warning"
 					role="button">로그아웃</a> 
 				</c:if> 
-					<a href="/temp/member/doattend?logout=로그아웃"
+					<c:if test="${login != null && login.classification == 'student'}">
+					<a href="doattend?logout=logout"
 					class="btn btn-warning" role="button">퇴실하기</a>
+					
+					</c:if>			

@@ -53,7 +53,13 @@ public class LoginInterCeptor extends HandlerInterceptorAdapter{
 				
 			}
 			log.info("login success"+"\t"+member.getId());
-			redirect="/member/loginsuccess";
+			if(member.getClassification().equals("student")){
+				log.info("student login");
+				redirect="/member/doattendform";
+			}else if(member.getClassification().equals("manager")){
+				log.info("manager login");
+				redirect="/member/studentattendancelist";
+			}
 		}else{
 			log.info("fail:check password");
 			mesg="비밀번호를 확인하세요";

@@ -44,7 +44,7 @@ public class LoginformInterCeptor extends HandlerInterceptorAdapter{
 			MemberDTO member = service.logincheck(cookieval);
 			log.info("before login user! success");
 			session.setAttribute("login", member);
-			response.sendRedirect("/test/member/loginsuccess");
+			response.sendRedirect("/test/member/doattendform");
 			return false;
 		}
 		

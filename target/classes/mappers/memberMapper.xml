@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.mybatis.example.BlogMapper">
+<!-- 반복sql문 될거같아서 만들어둠 삽입해서씀 -->
 <sql id="returnmember">
  select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
 'student' as classification
@@ -21,7 +22,7 @@ from teacher where id = #{userid}
 	<select id="login" resultType="memberDTO">
  	<include refid="returnmember"></include>
 	</select>
-
+<!-- 자동로그인을 위한 세션아이디 저장 -->
 <update id="updatesessionid" parameterType="hashmap">
 update 
 <if test="type == 'student'">
@@ -35,7 +36,7 @@ teacher
 </if>
 set sessionid = #{sessionid} where id = #{memberid}
 </update>
-
+<!-- 자동로그인을 위한 세션아이디 체크메서드 -->
 <select id="beforelogincheck" resultType="memberDTO">
 
 	select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
@@ -51,6 +52,41 @@ select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecat
 from teacher where sessionid = #{sessionid}
 
 </select>
-	
+<!-- 자기자신 출석 체크 리스트 -->
+<select id="myattendancelist" resultType="attendanceDTO">
+
+	select * from attendance where 
+	student_id = #{memberid} and 
+	to_char(course_date,'mm')= to_char(sysdate,'mm') 
+	order by course_date desc 
+
+</select>
+
+<!-- 학생들 출석 리스트 -->
+<select id="studentattendancelist" resultType="attendanceDTO">
+
+select * from attendance 
+where course_date = to_date(sysdate,'YY/MM/DD') 
+order by course_date desc
+
+</select>
+
+<!-- 오늘 출석 하지않은 학생 목록 -->
+
+<select id="todayabsence" resultType="memberDTO">
+
+select * from student
+ where id not in 
+ (select student_id from attendance where COURSE_DATE = to_char(sysdate,'YY-MM-DD'))
+
+</select>
+
+
+<!-- 출석체크를 query -->
+<insert id="doattend" parameterType="String">
+	insert into attendance values(attendance_seq.nextval,#{memberid},
+	(select course_id from register where student_id =#{memberid}),
+	to_char(sysdate,'HH24:Mi:SS'),to_date(sysdate,'yy/mm/dd'))
+</insert>	
 	
 </mapper>
