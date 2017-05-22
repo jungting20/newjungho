@@ -63,7 +63,7 @@ var message = "가입승인 요청이있습니다";
     <tbody>
       <tr>
         <td>${list.student_id }</td>
-        <td>${list.name }</td>
+        <td>${list.student_name }</td>
         <td>${list.course_date }</td>
         <td>${list.tag_time }</td>
       
@@ -73,4 +73,4 @@ var message = "가입승인 요청이있습니다";
   </table>
   </div>
   
-  <a href="AbsenceStudentlist" class="btn btn-success" role="button">출석하지않은인원확인하기</a>
+  <a href="todayabsence" class="btn btn-success" role="button">출석하지않은인원확인하기</a>

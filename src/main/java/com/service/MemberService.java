@@ -58,4 +58,23 @@ public class MemberService {
 
 		return dao.todayabsence();
 	}
+
+	public List<AttendanceDTO> getattendancedate(String student_id) throws Exception {
+
+		return dao.getattendancedate(student_id);
+	}
+
+	public int getattendancelate(String student_id) throws Exception {
+
+		return dao.getattendancelate(student_id);
+	}
+
+	public void updatemyinfo(MemberDTO dto) throws Exception {
+		
+		LOGGER.info("서비스 값"+dto.getEmail());
+		
+		dao.updatemyinfo(dto);
+
+	}
+
 }

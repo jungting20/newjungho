@@ -59,4 +59,22 @@ public class MemberDAO {
 		
 		return session.selectList("todayabsence");
 	}
+	
+	public List<AttendanceDTO> getattendancedate(String student_id) throws Exception{
+		
+		
+		return session.selectList("getattendancedate",student_id);
+	}
+	public int getattendancelate(String student_id)throws Exception{
+		int attendanceday = session.selectOne("getattendancelate",student_id);
+		int attendancelate = (attendanceday*100)/18 ;
+		
+		return attendancelate ;
+	}
+	public void updatemyinfo(MemberDTO dto)throws Exception{
+		
+		session.update("updatemyinfo",dto);
+		
+	}
+	
 }

@@ -5,15 +5,15 @@
 <mapper namespace="org.mybatis.example.BlogMapper">
 <!-- 반복sql문 될거같아서 만들어둠 삽입해서씀 -->
 <sql id="returnmember">
- select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+ select id,name,to_char(birthdate,'YY/MM/DD') as birthdate,password,gender,phone_num,email,confirmation,articlecategory,
 'student' as classification
 from student where id = #{userid}
 union  
-select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+select id,name,to_char(birthdate,'YY/MM/DD') as birthdate,password,gender,phone_num,email,confirmation,articlecategory,
 'manager' as classification
 from manager where id = #{userid}
 union
-select id,name,birthdate,password,gender,phone_num,email,confirmation,articlecategory,
+select id,name,to_char(birthdate,'YY/MM/DD') as birthdate,password,gender,phone_num,email,confirmation,articlecategory,
 'teacher' as classification
 from teacher where id = #{userid}
 
@@ -65,8 +65,8 @@ from teacher where sessionid = #{sessionid}
 <!-- 학생들 출석 리스트 -->
 <select id="studentattendancelist" resultType="attendanceDTO">
 
-select * from attendance 
-where course_date = to_date(sysdate,'YY/MM/DD') 
+select student_id,course_id,tag_time,to_char(course_date,'YY-MM-DD') as course_date,name as student_name from attendance,student 
+where student.id = attendance.student_id and course_date = to_date(sysdate,'YY/MM/DD')
 order by course_date desc
 
 </select>
@@ -81,12 +81,41 @@ select * from student
 
 </select>
 
+<select id="getattendancedate" resultType="attendanceDTO">
 
-<!-- 출석체크를 query -->
+select to_char(course_date,'YYYY-MM-DD') as course_date from attendance where to_char(course_date,'MM') = to_char(sysdate,'MM')  
+and student_id = #{student_id}
+group by course_date 
+having (to_date(max(tag_time),'HH24:MI:SS')-to_date(min(tag_time),'HH24:MI:SS'))*24>=6
+
+
+</select>
+
+<select id="getattendancelate" resultType="int">
+select count(count(to_char(course_date,'YYYY-MM-DD'))) from attendance where to_char(course_date,'MM') = to_char(sysdate,'MM')  
+and student_id = #{student_id}
+group by course_date 
+having (to_date(max(tag_time),'HH24:MI:SS')-to_date(min(tag_time),'HH24:MI:SS'))*24>=6
+	
+</select>
+
+
+<!-- 출석체크 query -->
 <insert id="doattend" parameterType="String">
 	insert into attendance values(attendance_seq.nextval,#{memberid},
 	(select course_id from register where student_id =#{memberid}),
 	to_char(sysdate,'HH24:Mi:SS'),to_date(sysdate,'yy/mm/dd'))
 </insert>	
+<!-- 내 정보 수정 -->
+<update id="updatemyinfo" >
+	
+	
+	update student set password=#{password},
+	phone_num=#{phone_num},email=#{email} where id = #{id}
+	
+	
+</update>
+
+
 	
 </mapper>

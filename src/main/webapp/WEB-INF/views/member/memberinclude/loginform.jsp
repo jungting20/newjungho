@@ -12,7 +12,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript">
-	var msg = '${msg}';
+	var msg = '${mesg}';
 	if(msg != null && msg !=''){
 		alert(msg);
 	}

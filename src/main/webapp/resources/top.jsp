@@ -82,8 +82,9 @@
 
 					<li><a href="BoardList?cate=free">자유게시판</a></li>
 					<li><a href="CourseSchedule">강의관리</a></li>
-					<li><a href="MemberInfo">내정보</a></li>
-
+					<c:if test="${userid != null && userid.classification == 'student'}">
+					<li><a href="myinfo">내정보</a></li>
+					</c:if>
 
 					<li><a href="AllMemberlist?mem=학생">모든학생보기</a></li>
 					<li><a href="AllMemberlist?mem=선생님">모든선생님보기</a></li>
@@ -107,11 +108,11 @@
 				<h1 id="clock"></h1>
 				
 				<br>
-				<c:if test="${login != null}">
+				<c:if test="${userid != null}">
 				<a href="/test/member/logout" class="btn btn-warning"
 					role="button">로그아웃</a> 
 				</c:if> 
-					<c:if test="${login != null && login.classification == 'student'}">
+					<c:if test="${userid != null && userid.classification == 'student'}">
 					<a href="doattend?logout=logout"
 					class="btn btn-warning" role="button">퇴실하기</a>
 					

@@ -61,7 +61,7 @@ public class MemberController {
 	public String doattend(HttpSession session,String logout,HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		String target = "redirect:myattendancecheck";
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		MemberDTO dto = (MemberDTO)session.getAttribute("userid");
 		String memberid = dto.getId();
 		service.doattend(memberid);
 		if(logout != null){
@@ -77,7 +77,7 @@ public class MemberController {
 	@RequestMapping("myattendancecheck")
 	public void myattendancelist(Model m,HttpSession session) throws Exception{
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		MemberDTO dto = (MemberDTO)session.getAttribute("userid");
 		String memberid = dto.getId();
 		m.addAttribute("list",service.myattendancelist(memberid));
 		log.info("myattendancelist!");
@@ -92,6 +92,23 @@ public class MemberController {
 	public void todayabsence(Model m) throws Exception{
 		
 		m.addAttribute("list",service.todayabsence());
+	}
+	
+	@RequestMapping("myinfo")
+	public void myinfo(Model m,HttpSession session) throws Exception{
+		
+		MemberDTO dto = (MemberDTO)session.getAttribute("userid");
+		m.addAttribute("attendancelate",service.getattendancelate(dto.getId()));
+		
+	}
+	
+	@RequestMapping("MyInfoModify")
+	public String infomodify(MemberDTO dto)throws Exception{
+		log.info(dto.getEmail());
+		
+		service.updatemyinfo(dto);
+		
+		return "redirect:myinfo"; 
 	}
 	
 	public void deletecookie(HttpServletRequest request,HttpServletResponse response,

@@ -42,7 +42,7 @@ public class LoginInterCeptor extends HandlerInterceptorAdapter{
 		if(member != null){
 		if(logindto.getUserid().equals(member.getId()) && 
 		logindto.getPasswd().equals(member.getPassword())){
-			session.setAttribute("login", member);
+			session.setAttribute("userid", member);
 			if(logindto.getIsautologin() != null){
 				log.info("add cookie");
 				Cookie logincookie = new Cookie("logincookie",session.getId());

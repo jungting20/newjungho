@@ -7,6 +7,24 @@ public class AttendanceDTO {
 	private String course_id;
 	private String tag_time;
 	private String course_date;
+	private String student_name;
+	
+	
+	
+	public AttendanceDTO(int id, String student_id, String course_id, String tag_time, String course_date,
+			String student_name) {
+		super();
+		this.id = id;
+		this.student_id = student_id;
+		this.course_id = course_id;
+		this.tag_time = tag_time;
+		this.course_date = course_date;
+		this.student_name = student_name;
+	}
+	public AttendanceDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}
@@ -37,19 +55,12 @@ public class AttendanceDTO {
 	public void setCourse_date(String course_date) {
 		this.course_date = course_date;
 	}
-	public AttendanceDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getStudent_name() {
+		return student_name;
 	}
-	public AttendanceDTO(int id, String student_id, String course_id, String tag_time, String course_date) {
-		super();
-		this.id = id;
-		this.student_id = student_id;
-		this.course_id = course_id;
-		this.tag_time = tag_time;
-		this.course_date = course_date;
-	}
-	
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}	
 	
 	
 	
