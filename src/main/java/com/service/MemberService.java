@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class MemberService {
 	public MemberDTO login(LoginDTO dto) throws Exception {
 
 		return dao.login(dto);
+	}
+
+	public MemberDTO login(String userid) throws Exception {
+
+		return dao.login(userid);
 	}
 
 	public void addsessionid(String memberid, String sessionid, String type) throws Exception {
@@ -70,10 +76,21 @@ public class MemberService {
 	}
 
 	public void updatemyinfo(MemberDTO dto) throws Exception {
-		
-		LOGGER.info("서비스 값"+dto.getEmail());
-		
+
+		LOGGER.info("서비스실행됨 \t" + dto.getEmail());
+
 		dao.updatemyinfo(dto);
+
+	}
+
+	public List<MemberDTO> memberlist(String mem) throws Exception {
+
+		return dao.memberlist(mem);
+	}
+
+	public void updateconfirmation(String id) throws Exception {
+
+		dao.updateconfirmation(id);
 
 	}
 

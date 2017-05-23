@@ -85,13 +85,13 @@
 					<c:if test="${userid != null && userid.classification == 'student'}">
 					<li><a href="myinfo">내정보</a></li>
 					</c:if>
-
-					<li><a href="AllMemberlist?mem=학생">모든학생보기</a></li>
-					<li><a href="AllMemberlist?mem=선생님">모든선생님보기</a></li>
-
-
-					<li><a href="AllMemberlist?mem=가입" id="wating">가입대기자보기 </a></li>
+					<c:if test="${userid != null && userid.classification == 'manager'}">
+					<li><a href="memberlist?mem=student">모든학생보기</a></li>
+					<li><a href="memberlist?mem=teacher">모든선생님보기</a></li>
+					<li><a href="memberlist?mem=watinglist" id="wating">가입대기자보기 </a></li>
 					<li><a href="GoProhibit">게시판금지어설정</a>
+					</c:if>
+
 					<li><a href="CourseList">강의목록</a></li>
 					<li><a href="TodayArticle">오늘의뉴스</a></li>
 					<li><a href="setreadarticle.jsp">다른뉴스보기</a></li>

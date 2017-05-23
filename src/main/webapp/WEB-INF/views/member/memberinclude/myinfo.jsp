@@ -116,7 +116,7 @@
 
 <body>
 
-	<form class="form-horizontal" role="form" action="MyInfoModify" method="post">
+	<form class="form-horizontal" role="form" method="post">
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="exampleInputEmail2">이름</label>
 			<div class="col-sm-10">

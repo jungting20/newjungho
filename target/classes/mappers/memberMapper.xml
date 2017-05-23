@@ -96,7 +96,21 @@ select count(count(to_char(course_date,'YYYY-MM-DD'))) from attendance where to_
 and student_id = #{student_id}
 group by course_date 
 having (to_date(max(tag_time),'HH24:MI:SS')-to_date(min(tag_time),'HH24:MI:SS'))*24>=6
-	
+</select>
+
+<select id="memberlist" parameterType="hashmap" resultType="memberDTO">
+select * from
+<if test="mem == 'student'">
+student
+</if>
+<if test="mem == 'teacher'">
+teacher
+</if> 
+<if test="mem == 'watinglist'">
+student
+where confirmation = 0
+</if>
+
 </select>
 
 
@@ -109,11 +123,13 @@ having (to_date(max(tag_time),'HH24:MI:SS')-to_date(min(tag_time),'HH24:MI:SS'))
 <!-- 내 정보 수정 -->
 <update id="updatemyinfo" >
 	
-	
 	update student set password=#{password},
 	phone_num=#{phone_num},email=#{email} where id = #{id}
 	
-	
+</update>
+
+<update id="updateconfirmation">
+	update student set confirmation = 1 where id = #{id}
 </update>
 
 

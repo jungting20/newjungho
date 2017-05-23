@@ -37,6 +37,7 @@ public class LoginformInterCeptor extends HandlerInterceptorAdapter{
 		
 		Cookie logincookie = WebUtils.getCookie(request, "logincookie");
 		if(logincookie != null){
+			String target = "doattendform";
 			log.info("로그인폼 프리핸들러 실행"+"\t"+logincookie.getValue());
 			HttpSession session = request.getSession();
 			String cookieval=logincookie.getValue();
@@ -44,7 +45,10 @@ public class LoginformInterCeptor extends HandlerInterceptorAdapter{
 			MemberDTO member = service.logincheck(cookieval);
 			log.info("before login user! success");
 			session.setAttribute("userid", member);
-			response.sendRedirect("/test/member/doattendform");
+			if(member.getClassification().equals("manager")){
+				target="studentattendancelist";
+			}
+			response.sendRedirect(target);
 			return false;
 		}
 		

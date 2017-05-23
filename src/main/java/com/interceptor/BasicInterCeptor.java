@@ -37,8 +37,8 @@ public class BasicInterCeptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		
 		log.info("=============start==============");
-		log.info("요청url"+"\t"+request.getRequestURI());
-		
+		log.info("요청url"+"\t"+request.getRequestURI()+"\t"+"method:"+request.getMethod());
+		log.info("들어온 파라미터:"+"\t"+request.getQueryString());
 		
 		log.info("전체적용 프리핸들러 끝");
 		return true;

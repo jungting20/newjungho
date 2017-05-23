@@ -103,12 +103,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="myinfo",method=RequestMethod.POST)
-	public String infomodify(MemberDTO dto)throws Exception{
+	public String infomodify(MemberDTO dto,HttpSession session)throws Exception{
 		log.info(dto.getEmail());
 		
 		service.updatemyinfo(dto);
+		session.removeAttribute("userid");
+		session.setAttribute("userid", service.login(dto.getId()));
 		
 		return "redirect:myinfo"; 
+	}
+	
+	@RequestMapping("memberlist")
+	public void viewmemberlist(String mem,Model m) throws Exception{
+		
+		m.addAttribute("list",service.memberlist(mem));
+		
 	}
 	
 	public void deletecookie(HttpServletRequest request,HttpServletResponse response,
