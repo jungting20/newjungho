@@ -12,6 +12,7 @@ input {
 }
 </style>
 <script>
+
 function auth(kk,id){
 //kk = this
 //id=list.id
@@ -79,32 +80,44 @@ function modify(kk,as){
 function realmodify(kk,as){
 	
 	
-	console.log(kk);
+	
 	var value = document.getElementsByClassName(kk);
-	var ajaxvalue = "";	
+	
+	var temp = {
+			name:value[0].value,
+			birthdate:value[1].value,
+			gender:value[2].value,
+			id:kk,
+			phone_num:value[3].value,
+			email:value[4].value
+	};
+	console.log(temp);
 	for(var i = 0 ; i <value.length ; i++){
 		value[i].setAttribute('readonly','readonly');
 		value[i].style.border = "0px solid black"
-		ajaxvalue += value[i].name+":"+"'"+value[i].value+"'"+",";
+		
 	}
+		
 	
-	ajaxvalue += "id"+":"+"'"+kk+"'";
-	ajaxvalue = "{"+ajaxvalue+"}";
-	console.log(ajaxvalue);
+	
+	
+	
+	
+	
 	
 	$(document).ready(function(){
+	
 		
 		
 		$.ajax({
 			type: "post",
 			url:"../ajax/updatememberajax",
 			dataType:"text",
-			
-			data: 
-				JSON.stringify(ajaxvalue),
+			headers:{
+				'Content-Type' : 'application/json'
+			},			
+			data:JSON.stringify(temp),
 			success: function(responseData, status, xhr){
-				
-				
 				
 				
 			}
