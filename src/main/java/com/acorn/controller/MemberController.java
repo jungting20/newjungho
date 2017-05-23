@@ -94,7 +94,7 @@ public class MemberController {
 		m.addAttribute("list",service.todayabsence());
 	}
 	
-	@RequestMapping("myinfo")
+	@RequestMapping(value="myinfo",method=RequestMethod.GET)
 	public void myinfo(Model m,HttpSession session) throws Exception{
 		
 		MemberDTO dto = (MemberDTO)session.getAttribute("userid");
@@ -102,7 +102,7 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("MyInfoModify")
+	@RequestMapping(value="myinfo",method=RequestMethod.POST)
 	public String infomodify(MemberDTO dto)throws Exception{
 		log.info(dto.getEmail());
 		

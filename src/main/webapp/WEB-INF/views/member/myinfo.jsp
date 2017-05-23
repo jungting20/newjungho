@@ -5,4 +5,3 @@
 <jsp:include page="/resources/top.jsp"/>
 <jsp:include page="./memberinclude/myinfo.jsp"/>
 <jsp:include page="/resources/bottom.jsp"/>
-
