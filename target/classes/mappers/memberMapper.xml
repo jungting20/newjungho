@@ -132,6 +132,19 @@ where confirmation = 0
 	update student set confirmation = 1 where id = #{id}
 </update>
 
+<!-- 매니저가 업데이트해줌 -->
+<update id="updatemember">
+
+	update student set name=#{name},
+	birthdate=#{birthdate},gender=#{gender},
+	phone_num=#{phone_num},email=#{email}
+	where id = #{id}
+</update>
+<!-- 업데이트 article 카테고리 -->
+<update id="updatearticlecategory">
+ update student set articlecategory = #{articlecategory} where id = #{id}
+ 
+ </update>
 
 	
 </mapper>

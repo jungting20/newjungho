@@ -1,21 +1,27 @@
 package com.acorn.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dto.ArticleCommentDTO;
 import com.dto.AttendanceDTO;
 import com.dto.MemberDTO;
-
 import com.service.MemberService;
 
 @RestController
@@ -45,12 +51,68 @@ public class AjaxRestController {
 	}
 	
 	@RequestMapping("updatememberajax")
-	public void updatemember(@RequestBody MemberDTO dto){
-			//여기 내일해야지!
-			
+	public void updatemember(@RequestBody MemberDTO dto)throws Exception{
+		
+		
+		service.updatemember(dto);
 			
 	}
+	@RequestMapping("readarticleajax")
+	public ResponseEntity<String> readarticleajax(HttpSession session,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type", "text/html;charset=UTF-8");
+		ResponseEntity<String> rs = null;
+		HashMap<String, String> map = new HashMap<>();
+		MemberDTO dto = (MemberDTO)session.getAttribute("userid");
+		String articlecatergory = dto.getArticlecategory();
+		if(request.getParameter("category")!=null){
+			articlecatergory=request.getParameter("category");
+			session.removeAttribute("rss");
+		}
+		String newscompany = request.getParameter("newscompany");
+		
+		if(newscompany == null){
+			newscompany="중앙일보";
+		}
+		map.put("newscompany", newscompany);
+		map.put("articlecatergory", articlecatergory);
+		
+		//log.info(service.urlcrawling(map));
+		rs = new ResponseEntity<String>(service.urlcrawling(map), header, HttpStatus.OK);
+		return rs;
+	}
 	
+	@RequestMapping("readhtmlajax")
+	public ResponseEntity<String> readhtml(String link) throws Exception{
+		
+		log.info("들어오는링크값:"+link);
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type", "text/html;charset=UTF8");
+		ResponseEntity<String> rs = null;
+		HashMap<String,String> map = new HashMap<>();
+		map.put("link", link);
+		
+		rs = new ResponseEntity<String>(service.urlcrawling(map),header,HttpStatus.OK);
+		return rs;
+	}
+	@RequestMapping("getcommentajax")
+	public ResponseEntity<List<ArticleCommentDTO>> 
+	getarticomment(String link) throws Exception{
+		
+		ResponseEntity<List<ArticleCommentDTO>> rs = null;
+		rs = new ResponseEntity<>(service.getarticlecommentlist(link),HttpStatus.OK);
+		
+		
+		return rs;
+	}
+	@RequestMapping("writecommentajax")
+	public void writecommentajax(@RequestBody ArticleCommentDTO dto)
+			throws Exception{
+		
+		service.writecomment(dto);
+	}
 	
 	
 }

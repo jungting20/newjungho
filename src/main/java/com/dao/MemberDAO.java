@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.dto.ArticleCommentDTO;
 import com.dto.AttendanceDTO;
 import com.dto.LoginDTO;
 import com.dto.MemberDTO;
+import com.dto.NewsarticleDTO;
 
 @Repository
 public class MemberDAO {
@@ -102,7 +104,33 @@ public class MemberDAO {
 	public void updateconfirmation(String id)throws Exception{
 		
 		session.update("updateconfirmation", id);
+		log.info("멤버 로그인 인증 성공!");
+	}
+	
+	public void updatemember(MemberDTO dto)throws Exception{
 		
+		session.update("updatemember", dto);
+		log.info("멤버 수정 성공!!");
+	}
+	
+	public NewsarticleDTO getrssaddress(HashMap<String, String> map)throws Exception{
+		
+		return session.selectOne("getrssaddress", map);
+	}
+	
+	public List<ArticleCommentDTO> getarticlecommentlist(String link)throws Exception{
+		
+		return session.selectList("getarticlecommentlist", link);
+	}
+	
+	public void writecomment(ArticleCommentDTO dto)throws Exception{
+		
+		session.insert("writecomment", dto);
+	}
+	
+	public void updatearticlecategory(MemberDTO dto)throws Exception{
+		
+		session.update("updatearticlecategory", dto);
 	}
 	
 }

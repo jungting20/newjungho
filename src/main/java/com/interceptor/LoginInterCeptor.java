@@ -54,8 +54,15 @@ public class LoginInterCeptor extends HandlerInterceptorAdapter{
 			}
 			log.info("login success"+"\t"+member.getId());
 			if(member.getClassification().equals("student")){
-				log.info("student login");
-				redirect="/member/doattendform";
+				if(member.getConfirmation()==0){
+					log.info("loginfail 매니저 인증 필요");
+					mesg = "승인이 필요합니다";
+					redirect="/member/loginform";
+				}else{
+					
+					log.info("student login");
+					redirect="/member/doattendform";
+				}
 			}else if(member.getClassification().equals("manager")){
 				log.info("manager login");
 				redirect="/member/studentattendancelist";

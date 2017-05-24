@@ -93,8 +93,10 @@
 					</c:if>
 
 					<li><a href="CourseList">강의목록</a></li>
-					<li><a href="TodayArticle">오늘의뉴스</a></li>
-					<li><a href="setreadarticle.jsp">다른뉴스보기</a></li>
+					<c:if test="${userid != null }">
+					<li><a href="readarticle">오늘의뉴스</a></li>
+					<li><a href="setreadarticle">다른뉴스보기</a></li>
+					</c:if>
 
 				</ul>
 				<br>

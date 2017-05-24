@@ -119,6 +119,29 @@ public class MemberController {
 		m.addAttribute("list",service.memberlist(mem));
 		
 	}
+	@RequestMapping("readarticle")
+	public void goreadarticle()throws Exception{
+		
+		
+	}
+	@RequestMapping(value="setreadarticle",method=RequestMethod.GET)
+	public void setcategorypage()throws Exception{
+		
+		
+	}
+	@RequestMapping(value="setreadarticle",method=RequestMethod.POST)
+	public String updatearticlecategory(MemberDTO dto,HttpSession session)throws Exception{
+		
+		log.info("들어오는아이디"+dto.getId());
+		log.info("들어오는 아티클카테"+dto.getArticlecategory());
+		
+		
+		service.updatearticlecategory(dto);
+		session.removeAttribute("userid");
+		session.setAttribute("userid", service.login(dto.getId()));
+		
+		return "redirect:readarticle";
+	}
 	
 	public void deletecookie(HttpServletRequest request,HttpServletResponse response,
 			String cookiename){
