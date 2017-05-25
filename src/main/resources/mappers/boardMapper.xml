@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn.boardMapper">
+
+
+	<select id="getboardcount" resultType="int">
+		select count(*) from board
+
+	</select>
+
+	<select id="getboardlist" resultType="boardDTO">
+
+		select id,title,writer_id,content,filepath,category,
+		written_date,readcnt
+		from (select
+		id,title,writer_id,content,filepath,category,written_date,
+		readcnt,
+		row_number()over(order by id desc) as rank from board) 
+		where rank
+		between #{start} and #{end}
+
+	</select>
+
+
+</mapper>

@@ -80,7 +80,7 @@
 
 					<li class="active"><a href="BoardList?cate=공지사항">공지사항</a></li>
 
-					<li><a href="BoardList?cate=free">자유게시판</a></li>
+					<li><a href="../board/boardlist">자유게시판</a></li>
 					<li><a href="CourseSchedule">강의관리</a></li>
 					<c:if test="${userid != null && userid.classification == 'student'}">
 					<li><a href="myinfo">내정보</a></li>
