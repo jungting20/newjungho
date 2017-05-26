@@ -6,7 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getboardcount" resultType="int">
-		select count(*) from board
+		select count(*) from board where 
+		<if test="search != null">
+			<if test="search == ''">
+			</if>
+			<if test="searchtype == 't'">
+			title like '%'||#{search}||'%'
+			</if>
+			<if test="searchtype == 'c'">
+			content like '%'||#{search}||'%'
+			</if>
+			<if test="searchtype == 'w'">
+			writer_id like '%'||#{search}||'%'
+			</if>
+		</if>
 
 	</select>
 
@@ -20,6 +33,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		row_number()over(order by id desc) as rank from board) 
 		where rank
 		between #{start} and #{end}
+		<if test="search != null">
+			<if test="search == ''">
+			</if>
+			<if test="searchtype == 't'">
+			and title like '%'||#{search}||'%'
+			</if>
+			<if test="searchtype == 'c'">
+			and content like '%'||#{search}||'%'
+			</if>
+			<if test="searchtype == 'w'">
+			and writer_id like '%'||#{search}||'%'
+			</if>
+		</if>
 
 	</select>
 

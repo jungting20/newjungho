@@ -2,6 +2,9 @@ package com.dto;
 
 import java.util.List;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class BoardpageDTO {
 	
 	private int totalcount;
@@ -52,16 +55,19 @@ public class BoardpageDTO {
 	}
 	public void setTotalcount(int totalcount) {
 		this.totalcount = totalcount;
-		int temp = ((binfo.getPage()/this.displaypage)+1)*this.displaypage;
-		if(temp>=totalcount/binfo.getPerpagelist()){
-			this.endpage = getTotalcount()/binfo.getPerpagelist();
+		int lastpage = totalcount%binfo.getPerpagelist()==0?
+				totalcount/binfo.getPerpagelist():totalcount/binfo.getPerpagelist()+1;
+		int temp = binfo.getPage()%this.displaypage==0?
+				binfo.getPage():((binfo.getPage()/this.displaypage)+1)*this.displaypage;
+		if(temp>=lastpage){
+			this.endpage = lastpage;
 		}else{
 			this.endpage = temp;
 		}
 		
 		this.startpage = endpage - (this.displaypage-1);
-		this.prev = getStartpage()==1?false:true;
-		this.next = binfo.getPage()==getEndpage()?false:true;
+		this.prev = binfo.getPage()==1?false:true;
+		this.next = binfo.getPage()==lastpage?false:true;
 		
 		
 	}
@@ -98,6 +104,17 @@ public class BoardpageDTO {
 		this.binfo = binfo;
 		
 	}
+	public String urimaker(BoardinfoforlistDTO dto){
+		UriComponents uri = UriComponentsBuilder.newInstance()
+				.queryParam("page", dto.getPage())
+				.queryParam("perpagelist", dto.getPerpagelist())
+				.queryParam("search", dto.getSearch())
+				.queryParam("searchtype", dto.getSearchtype())
+				.build();
+		
+		return uri.toUriString();
+	}
+	
 	
 	
 }

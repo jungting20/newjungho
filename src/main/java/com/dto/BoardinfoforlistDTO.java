@@ -1,5 +1,8 @@
 package com.dto;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class BoardinfoforlistDTO {
 	
 	private int page;
@@ -70,6 +73,8 @@ public class BoardinfoforlistDTO {
 	public void setSearchtype(String searchtype) {
 		this.searchtype = searchtype;
 	}
+	
+	
 
 
 

@@ -1,11 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+ $("#prev").click(function(){
+	 
+	 console.log('함수실행?')
+	 var url = 'boardlist?page=${dto.binfo.page-1}&search=${dto.binfo.search}&searchtype=${dto.binfo.searchtype}'
+	 
+	 $(location).attr('href',url);
+	 
+ });
+ 
+ $("#next").click(function(){
+	 
+	 console.log('함수실행?')
+	 var url = 'boardlist?page=${dto.binfo.page+1}'
+	 
+	 $(location).attr('href',url);
+	 
+ });
+ 
+ 
+});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -20,28 +42,46 @@
 			</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${dto.list}" var="list">
 			<tr>
-			<td>1</td>			
-			<td>테스트</td>
-			<td>정호</td>
-			<td>2017-05-25</td>
-			<td>1</td>
+			<td>${list.id }</td>
+			<td>${list.title }</td>
+			<td>${list.writer_id }</td>
+			<td>${list.written_date }</td>
+			<td>${list.readcnt }</td>
 			</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 		<a href="" class="btn btn-default pull-left">글쓰기</a>
 		
 		<div class="text-center">
 			<ul class="pagination">
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
+			
+			<c:out value="${dto.prev?'<li><a href=# id=prev>prev</a>':'' }" escapeXml="false"></c:out>
+			<c:forEach begin="${dto.startpage }" end="${dto.endpage }" varStatus="i">
+			<c:choose>
+			<c:when test="${dto.binfo.page != i.current}">
+			<li><a href="boardlist?page=${i.current}">${i.current}</a></li>
+			</c:when>
+			<c:otherwise>
+			<li class="active"><a>${i.current}</a></li>
+			</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			<c:out value="${dto.next?'<li><a href=# id=next >next</a>':'' }" escapeXml="false"></c:out>
 			</ul>
 			
 		</div>
-		
+		<form action="boardlist">
+		<select name="searchtype">
+		<option value="t">제목</option>
+		<option value="c">내용</option>
+		<option value="w">글쓴이</option>
+		</select>
+		<input type="text" name="search">
+		<input type="submit" value="검색">
+		</form>
 		
 	</div>
 </body>
-</html>
