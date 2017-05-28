@@ -15,6 +15,9 @@ import com.service.BoardService;
 @RequestMapping("/board/*")
 public class BoardController {
 
+	
+	//연습용
+	
 	@Autowired
 	private BoardService service;
 	
