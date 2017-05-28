@@ -24,6 +24,8 @@ import com.service.MemberService;
 @RequestMapping("/member/*")
 public class MemberController {
 	
+	
+	//연습용2
 	@Autowired
 	private MemberService service;
 	
