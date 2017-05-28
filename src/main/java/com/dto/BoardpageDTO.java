@@ -65,7 +65,11 @@ public class BoardpageDTO {
 			this.endpage = temp;
 		}
 		
+		
 		this.startpage = endpage - (this.displaypage-1);
+		if(startpage <= 0 ){
+			this.startpage = 1;
+		}
 		this.prev = binfo.getPage()==1?false:true;
 		this.next = binfo.getPage()==lastpage?false:true;
 		

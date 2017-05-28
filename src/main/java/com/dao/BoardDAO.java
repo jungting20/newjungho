@@ -23,9 +23,9 @@ public class BoardDAO {
 		
 		BoardpageDTO dto = new BoardpageDTO();
 		log.info("숫자는 못직나:"+bi.getPage() + bi.getPerpagelist() + bi.getStart()+bi.getEnd());
-		log.info("갯수몇개?:"+session.selectOne("getboardcount"));
+		log.info("갯수몇개?:"+session.selectOne("getboardcount",bi));
 		dto.setBinfo(bi);
-		dto.setTotalcount(session.selectOne("getboardcount"));
+		dto.setTotalcount(session.selectOne("getboardcount",bi));
 		dto.setList(session.selectList("getboardlist", bi));
 		
 		log.info("스타트페이지:"+dto.getStartpage());

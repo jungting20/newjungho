@@ -5,22 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.acorn.boardMapper">
 
 
-	<select id="getboardcount" resultType="int">
-		select count(*) from board where 
-		<if test="search != null">
+<sql id="search">
+	<if test="search != null">
 			<if test="search == ''">
 			</if>
-			<if test="searchtype == 't'">
-			title like '%'||#{search}||'%'
+			<if test="searchtype == 'title'">
+			and title like '%'||#{search}||'%'
 			</if>
-			<if test="searchtype == 'c'">
-			content like '%'||#{search}||'%'
+			<if test="searchtype == 'content'">
+			and content like '%'||#{search}||'%'
 			</if>
-			<if test="searchtype == 'w'">
-			writer_id like '%'||#{search}||'%'
+			<if test="searchtype == 'writer'">
+			and writer_id like '%'||#{search}||'%'
 			</if>
 		</if>
 
+
+</sql>
+
+
+
+	<select id="getboardcount" resultType="int">
+		select count(*) from board where id > 0 
+		
+		<include refid="search"></include>
 	</select>
 
 	<select id="getboardlist" resultType="boardDTO">
@@ -33,19 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		row_number()over(order by id desc) as rank from board) 
 		where rank
 		between #{start} and #{end}
-		<if test="search != null">
-			<if test="search == ''">
-			</if>
-			<if test="searchtype == 't'">
-			and title like '%'||#{search}||'%'
-			</if>
-			<if test="searchtype == 'c'">
-			and content like '%'||#{search}||'%'
-			</if>
-			<if test="searchtype == 'w'">
-			and writer_id like '%'||#{search}||'%'
-			</if>
-		</if>
+		<include refid="search"></include>
 
 	</select>
 

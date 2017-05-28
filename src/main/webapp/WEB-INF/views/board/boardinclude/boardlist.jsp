@@ -10,7 +10,7 @@ $(document).ready(function () {
  $("#prev").click(function(){
 	 
 	 console.log('함수실행?')
-	 var url = 'boardlist?page=${dto.binfo.page-1}&search=${dto.binfo.search}&searchtype=${dto.binfo.searchtype}'
+	 var url = 'boardlist?page=${dto.binfo.page-1}'
 	 
 	 $(location).attr('href',url);
 	 
@@ -75,12 +75,14 @@ $(document).ready(function () {
 		</div>
 		<form action="boardlist">
 		<select name="searchtype">
-		<option value="t">제목</option>
-		<option value="c">내용</option>
-		<option value="w">글쓴이</option>
+		<option value="title">제목</option>
+		<option value="content">내용</option>
+		<option value="writer">글쓴이</option>
 		</select>
 		<input type="text" name="search">
 		<input type="submit" value="검색">
+		<input type="hidden" value=1 name="page">
+		<input type="hidden" value=10 name="perpagelist">
 		</form>
 		
 	</div>
