@@ -17,6 +17,7 @@ public class BoardController {
 
 	
 	//연습용
+	//연습용쓰리
 	
 	@Autowired
 	private BoardService service;
