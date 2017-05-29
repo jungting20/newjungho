@@ -28,6 +28,9 @@ public class BoardController {
 	@RequestMapping(value="boardlist",method=RequestMethod.GET)
 	public void goboardlist(BoardinfoforlistDTO dto,Model m) throws Exception{
 		
+		
+		
+		System.out.println("list 사이즈:"+service.getboardlist(dto).getList().size());
 		m.addAttribute("dto", service.getboardlist(dto));
 		
 		

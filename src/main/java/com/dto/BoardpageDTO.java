@@ -110,8 +110,6 @@ public class BoardpageDTO {
 	}
 	public String urimaker(BoardinfoforlistDTO dto){
 		UriComponents uri = UriComponentsBuilder.newInstance()
-				.queryParam("page", dto.getPage())
-				.queryParam("perpagelist", dto.getPerpagelist())
 				.queryParam("search", dto.getSearch())
 				.queryParam("searchtype", dto.getSearchtype())
 				.build();

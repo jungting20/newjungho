@@ -10,7 +10,7 @@ $(document).ready(function () {
  $("#prev").click(function(){
 	 
 	 console.log('함수실행?')
-	 var url = 'boardlist?page=${dto.binfo.page-1}'
+	 var url = 'boardlist${dto.urimaker(dto.binfo)}&page=${dto.binfo.page-1}'
 	 
 	 $(location).attr('href',url);
 	 
@@ -19,7 +19,7 @@ $(document).ready(function () {
  $("#next").click(function(){
 	 
 	 console.log('함수실행?')
-	 var url = 'boardlist?page=${dto.binfo.page+1}'
+	 var url = 'boardlist${dto.urimaker(dto.binfo)}&page=${dto.binfo.page+1}'
 	 
 	 $(location).attr('href',url);
 	 
@@ -62,7 +62,7 @@ $(document).ready(function () {
 			<c:forEach begin="${dto.startpage }" end="${dto.endpage }" varStatus="i">
 			<c:choose>
 			<c:when test="${dto.binfo.page != i.current}">
-			<li><a href="boardlist?page=${i.current}">${i.current}</a></li>
+			<li><a href="boardlist${dto.urimaker(dto.binfo)}&page=${i.current}">${i.current}</a></li>
 			</c:when>
 			<c:otherwise>
 			<li class="active"><a>${i.current}</a></li>

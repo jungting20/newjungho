@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getboardcount" resultType="int">
-		select count(*) from board where id > 0 
+		select count(id) from board where id > 0 
 		
 		<include refid="search"></include>
 	</select>
@@ -38,10 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select
 		id,title,writer_id,content,filepath,category,written_date,
 		readcnt,
-		row_number()over(order by id desc) as rank from board) 
+		row_number()over(order by id desc) as rank from board where id > 0 
+		<include refid="search"></include>) 
 		where rank
 		between #{start} and #{end}
-		<include refid="search"></include>
+		
 
 	</select>
 
