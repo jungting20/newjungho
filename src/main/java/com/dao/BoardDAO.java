@@ -12,7 +12,7 @@ import com.dto.BoardpageDTO;
 
 @Repository
 public class BoardDAO {
-
+//깃허브
 	@Autowired
 	private SqlSession session;
 	
