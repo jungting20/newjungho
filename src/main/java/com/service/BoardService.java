@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.acorn.controller.MemberController;
 import com.dao.BoardDAO;
+import com.dto.BoardDTO;
 import com.dto.BoardinfoforlistDTO;
 import com.dto.BoardpageDTO;
 
@@ -20,8 +21,12 @@ public class BoardService {
 
 	public BoardpageDTO getboardlist(BoardinfoforlistDTO bi) throws Exception {
 
-		
 		return dao.getboardlist(bi);
 
+	}
+
+	public void addboard(BoardDTO dto) throws Exception {
+
+		dao.addboard(dto);
 	}
 }

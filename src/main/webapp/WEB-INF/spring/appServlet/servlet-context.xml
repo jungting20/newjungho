@@ -49,7 +49,7 @@
 		<mvc:interceptor>
 		<mvc:mapping path="/member/doattend"/>
 		<mvc:mapping path="/member/myattendancecheck"/>
-		
+		<mvc:mapping path="/board/boardwriteform"/>
 		<beans:ref bean="LoginAuthInterCeptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

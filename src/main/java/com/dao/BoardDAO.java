@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.acorn.controller.MemberController;
+import com.dto.BoardDTO;
 import com.dto.BoardinfoforlistDTO;
 import com.dto.BoardpageDTO;
 
@@ -31,6 +32,11 @@ public class BoardDAO {
 		log.info("스타트페이지:"+dto.getStartpage());
 		
 		return dto;
+	}
+	
+	public void addboard(BoardDTO dto)throws Exception{
+		
+		session.insert("addboard", dto);
 	}
 	
 }

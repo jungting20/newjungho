@@ -53,7 +53,7 @@ $(document).ready(function () {
 			</c:forEach>
 			</tbody>
 		</table>
-		<a href="" class="btn btn-default pull-left">글쓰기</a>
+		<a href="boardwriteform${dto.urimaker(dto.binfo)}&category=free&page=${dto.binfo.page}" class="btn btn-default pull-left">글쓰기</a>
 		
 		<div class="text-center">
 			<ul class="pagination">

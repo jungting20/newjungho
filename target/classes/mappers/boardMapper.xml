@@ -45,6 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 
 	</select>
-
+	
+	<insert id="addboard">
+	
+	insert into board(id,title,writer_id,content,category,written_date) 
+	values(board_seq.nextval,#{title},#{writer_id},#{content},#{category},sysdate)
+	
+	</insert>
+	
 
 </mapper>

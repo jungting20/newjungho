@@ -24,6 +24,9 @@ public class LoginAuthInterCeptor extends HandlerInterceptorAdapter{
 			throws Exception {
 			
 		HttpSession session = request.getSession();
+		String url = request.getRequestURI();
+		String query = request.getQueryString();
+		
 		if(session.getAttribute("userid") == null){
 			FlashMap map = new FlashMap();
 			map.put("msg", "로그인 하세요");
