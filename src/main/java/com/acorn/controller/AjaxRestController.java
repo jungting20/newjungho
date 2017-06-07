@@ -1,8 +1,10 @@
 package com.acorn.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import com.acorn.common.UploadUtil;
 import com.dto.ArticleCommentDTO;
 import com.dto.AttendanceDTO;
 import com.dto.MemberDTO;
@@ -30,6 +35,9 @@ public class AjaxRestController {
 	
 	@Autowired
 	private MemberService service;
+	
+	@Resource(name="uploadpath")
+	private String uploadpath;
 	
 	private static final Logger log = LoggerFactory.getLogger(AjaxRestController.class);
 	
@@ -113,6 +121,20 @@ public class AjaxRestController {
 		
 		service.writecomment(dto);
 	}
+	@RequestMapping("uploadajax")
+	public String uploadajax(MultipartRequest request) throws Exception{
+		
+		List<MultipartFile> list = request.getFiles("file");
+		
+		
+		
+		
+		return null;
+	}
+	
+
+	
+	
 	
 	
 }

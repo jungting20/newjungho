@@ -50,6 +50,12 @@ public class BoardController {
 		return "redirect:boardlist";
 	}
 	
+	@RequestMapping(value="fileupload",method=RequestMethod.GET)
+	public void gofileupload()throws Exception{
+		
+		
+		
+	}
 	
 	
 	
