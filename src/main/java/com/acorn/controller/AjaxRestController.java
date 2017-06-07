@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.acorn.common.UploadUtil;
 import com.dto.ArticleCommentDTO;
 import com.dto.AttendanceDTO;
+import com.dto.FileUploadDTO;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 
@@ -122,14 +123,15 @@ public class AjaxRestController {
 		service.writecomment(dto);
 	}
 	@RequestMapping("uploadajax")
-	public String uploadajax(MultipartRequest request) throws Exception{
+	public List<FileUploadDTO> uploadajax(MultipartRequest request) throws Exception{
 		
 		List<MultipartFile> list = request.getFiles("file");
 		
+		List<FileUploadDTO> infolist = 
+				UploadUtil.fileupload(list, uploadpath);
 		
 		
-		
-		return null;
+		return infolist;
 	}
 	
 

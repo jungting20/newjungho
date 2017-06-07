@@ -2,6 +2,7 @@ package com.acorn.common;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +20,7 @@ public class UploadUtil {
 	public static List<FileUploadDTO> 
 	fileupload(List<MultipartFile> list,String uploadpath)throws Exception{
 		
+		List<FileUploadDTO> infolist = new ArrayList<>();
 		for (MultipartFile file : list) {
 			UUID uid = UUID.randomUUID();
 			String fname = uid.toString()+"_"+file.getOriginalFilename();
@@ -26,9 +28,9 @@ public class UploadUtil {
 			String realuploadpath = mkpath(uploadpath);
 			File f = new File(realuploadpath, fname);
 			FileCopyUtils.copy(b, f);
-		
+			infolist.add(new FileUploadDTO(file.getOriginalFilename()));
 		}
-		return null;
+		return infolist;
 	}
 	
 	

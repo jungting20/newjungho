@@ -10,7 +10,7 @@
 .fileDrop {
 
 width:100%;
-height:200px;
+height:1000px;
 border:1px dotted blue;
 
 
@@ -29,6 +29,7 @@ color:gray;
 
 </head>
 <body>
+<!-- 파일 드랍영역보다 스크립트를 아래 써야 이벤트가 제대로 발생함 -->
 <div class="fileDrop">
 
 
@@ -58,13 +59,14 @@ $(".fileDrop").on("drop",function(event) {
 	$.ajax({
 		url:'/test/ajax/uploadajax',
 		data:formData,
-		dataType:'text',
+		dataType:'json',
 		processData:false,
 		contentType:false,
 		type:'POST',
 		success:function(data){
 			
 			alert(data);
+			console.log(data);
 		}
 		
 	})
