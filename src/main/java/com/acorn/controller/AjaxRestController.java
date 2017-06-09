@@ -1,6 +1,8 @@
 package com.acorn.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,12 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +31,7 @@ import com.dto.ArticleCommentDTO;
 import com.dto.AttendanceDTO;
 import com.dto.FileUploadDTO;
 import com.dto.MemberDTO;
+import com.service.FileUploadService;
 import com.service.MemberService;
 
 @RestController
@@ -36,6 +40,8 @@ public class AjaxRestController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private FileUploadService fservice;
 	
 	@Resource(name="uploadpath")
 	private String uploadpath;
@@ -126,12 +132,38 @@ public class AjaxRestController {
 	public List<FileUploadDTO> uploadajax(MultipartRequest request) throws Exception{
 		
 		List<MultipartFile> list = request.getFiles("file");
-		
 		List<FileUploadDTO> infolist = 
 				UploadUtil.fileupload(list, uploadpath);
-		
+		fservice.fileupload(infolist);
 		
 		return infolist;
+	}
+	
+	@RequestMapping("downloadajax")
+	public ResponseEntity<byte[]> download(String realuploadpath)throws Exception{
+		
+		
+		String type = realuploadpath.substring(
+				realuploadpath.lastIndexOf(".")+1);
+		String fname = realuploadpath.substring(realuploadpath.lastIndexOf("_"));
+		MediaType mtype;
+		ResponseEntity<byte[]> entity = null;
+		File f = new File(realuploadpath);
+		HttpHeaders headers = new HttpHeaders();
+		Charset set = Charset.forName("ISO-8859-1");
+		System.out.println("업로드유틸:"+UploadUtil.getmediatype(type));
+		if(UploadUtil.getmediatype(type) != null){
+			mtype = UploadUtil.getmediatype(type);
+		}else{
+			mtype = MediaType.APPLICATION_OCTET_STREAM;
+			headers.setContentDispositionFormData("attachment", "[]"+type,set);
+		}
+	
+		headers.setContentType(mtype);
+		FileInputStream fis = new FileInputStream(f);
+		entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(fis), headers, HttpStatus.OK);
+		
+		return entity;
 	}
 	
 

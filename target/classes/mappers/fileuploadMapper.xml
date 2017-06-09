@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn.FileUploadMapper">
+ 
+ 
+	<select id="getfilelist" resultType="fileUploadDTO">
+		select originalfilename,realuploadpath,uploadedfilename,id,uploaddate
+		from (select originalfilename,realuploadpath,uploadedfilename,id,
+		uploaddate,row_number() over(order by id desc) as rank from fileupload)
+		where rank between #{start} and #{end}
+	</select>
+	
+	<select id="getfilecount" resultType="int">
+		select count(*) from fileupload
+	</select>
+
+ 
+ <insert id="fileupload">
+  insert all 
+ <foreach item="item" index="index" collection="list">
+ into fileupload values(#{item.originalfilename},
+  #{item.realuploadpath},#{item.uploadedfilename},fileupload_sequence.nextval+#{index},sysdate) 
+  </foreach>
+ select * from dual
+ </insert>
+ 
+</mapper>

@@ -38,7 +38,6 @@ public class LoginInterCeptor extends HandlerInterceptorAdapter{
 		ModelMap map = modelAndView.getModelMap();
 		LoginDTO logindto = (LoginDTO)map.get("LoginDTO");
 		MemberDTO member =(MemberDTO)map.get("member");
-		
 		if(member != null){
 		if(logindto.getUserid().equals(member.getId()) && 
 		logindto.getPasswd().equals(member.getPassword())){

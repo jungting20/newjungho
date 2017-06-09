@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dto.BoardDTO;
 import com.dto.BoardinfoforlistDTO;
 import com.service.BoardService;
+import com.service.FileUploadService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -22,6 +23,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private FileUploadService fservice;
 	
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
@@ -51,9 +55,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="fileupload",method=RequestMethod.GET)
-	public void gofileupload()throws Exception{
+	public void gofileupload(BoardinfoforlistDTO dto,Model m)
+			throws Exception{
 		
 		
+		m.addAttribute("dto",fservice.getfilelist(dto));
+		log.info(fservice.getfilelist(dto).getFlist().get(0).getOriginalfilename());
 		
 	}
 	

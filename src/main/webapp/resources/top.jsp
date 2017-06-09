@@ -91,8 +91,9 @@
 					<li><a href="memberlist?mem=watinglist" id="wating">가입대기자보기 </a></li>
 					<li><a href="GoProhibit">게시판금지어설정</a>
 					</c:if>
-
+					
 					<li><a href="CourseList">강의목록</a></li>
+					<li><a href="fileupload">자료게시판</a>
 					<c:if test="${userid != null }">
 					<li><a href="readarticle">오늘의뉴스</a></li>
 					<li><a href="setreadarticle">다른뉴스보기</a></li>

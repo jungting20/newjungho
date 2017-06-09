@@ -15,10 +15,19 @@ public class BoardpageDTO {
 	private int startpage;
 	private BoardinfoforlistDTO binfo;
 	private List<BoardDTO> list;
+	private List<FileUploadDTO> flist;
 	
 	
 	
 	
+	public List<FileUploadDTO> getFlist() {
+		return flist;
+	}
+
+	public void setFlist(List<FileUploadDTO> flist) {
+		this.flist = flist;
+	}
+
 	public BoardpageDTO() {
 		this.displaypage = 10;
 		this.endpage=10;
@@ -55,6 +64,7 @@ public class BoardpageDTO {
 	}
 	public void setTotalcount(int totalcount) {
 		this.totalcount = totalcount;
+		System.out.println("lastpage:"+binfo.getPerpagelist()+totalcount);	
 		int lastpage = totalcount%binfo.getPerpagelist()==0?
 				totalcount/binfo.getPerpagelist():totalcount/binfo.getPerpagelist()+1;
 		int temp = binfo.getPage()%this.displaypage==0?
