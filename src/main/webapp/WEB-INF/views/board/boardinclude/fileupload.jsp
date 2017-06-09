@@ -83,8 +83,10 @@ small {
 							var result = "";
 							$.each(data, function(idx, data) {
 
-								result += "<tr><td><a href=/test/ajax/downloadajax?fname="+data.realuploadpath+">"
-										+ data.originalfilename + "</a></td>"
+								result += "<tr><td><form action=/test/ajax/downloadajax method=POST>"
+								+"<input type=hidden value="+data.realuploadpath+">"
+										+ "<input type=submit value="+data.originalfilename+">"+ 
+										"</td>"
 										+ "<td>" + data.uploaddate
 										+ "</td></tr>";
 

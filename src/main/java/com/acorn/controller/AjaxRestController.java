@@ -156,7 +156,7 @@ public class AjaxRestController {
 			mtype = UploadUtil.getmediatype(type);
 		}else{
 			mtype = MediaType.APPLICATION_OCTET_STREAM;
-			headers.setContentDispositionFormData("attachment", "[]"+type,set);
+			headers.setContentDispositionFormData("attachment", "[]"+"."+type,set);
 		}
 	
 		headers.setContentType(mtype);
