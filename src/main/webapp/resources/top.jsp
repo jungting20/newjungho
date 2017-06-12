@@ -83,22 +83,22 @@
 					<li><a href="../board/boardlist">자유게시판</a></li>
 					<li><a href="CourseSchedule">강의관리</a></li>
 					<c:if test="${userid != null && userid.classification == 'student'}">
-					<li><a href="myinfo">내정보</a></li>
+					<li><a href="../member/myinfo">내정보</a></li>
 					</c:if>
 					<c:if test="${userid != null && userid.classification == 'manager'}">
-					<li><a href="memberlist?mem=student">모든학생보기</a></li>
-					<li><a href="memberlist?mem=teacher">모든선생님보기</a></li>
-					<li><a href="memberlist?mem=watinglist" id="wating">가입대기자보기 </a></li>
+					<li><a href="../member/memberlist?mem=student">모든학생보기</a></li>
+					<li><a href="../member/memberlist?mem=teacher">모든선생님보기</a></li>
+					<li><a href="../member/memberlist?mem=watinglist" id="wating">가입대기자보기 </a></li>
 					<li><a href="GoProhibit">게시판금지어설정</a>
 					</c:if>
 					
 					<li><a href="CourseList">강의목록</a></li>
-					<li><a href="fileupload">자료게시판</a>
+					<li><a href="../board/fileupload">자료게시판</a>
 					<c:if test="${userid != null }">
-					<li><a href="readarticle">오늘의뉴스</a></li>
-					<li><a href="setreadarticle">다른뉴스보기</a></li>
+					<li><a href="../member/readarticle">오늘의뉴스</a></li>
+					<li><a href="../member/setreadarticle">다른뉴스보기</a></li>
 					</c:if>
-
+					
 				</ul>
 				<br>
 

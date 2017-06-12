@@ -32,6 +32,7 @@ public class LoginAuthInterCeptor extends HandlerInterceptorAdapter{
 			map.put("msg", "로그인 하세요");
 			FlashMapManager fm = RequestContextUtils.getFlashMapManager(request);
 			fm.saveOutputFlashMap(map, request, response);
+			
 			response.sendRedirect("/test/member/loginform");
 			return false;
 		}

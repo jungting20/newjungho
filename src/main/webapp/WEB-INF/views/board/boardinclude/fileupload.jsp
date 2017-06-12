@@ -59,6 +59,12 @@ small {
 		$(".fileDrop").on(
 				"drop",
 				function(event) {
+					var user = '${userid.classification}';
+					if(user == 'student'){
+						alert('업로드가 금지되었습니다.')
+						event.preventDefault();
+						return;
+					}
 					event.preventDefault();
 
 					var files = event.originalEvent.dataTransfer.files;
@@ -82,9 +88,10 @@ small {
 
 							var result = "";
 							$.each(data, function(idx, data) {
-
+								
+								console.log(data.realuploadpath);
 								result += "<tr><td><form action=/test/ajax/downloadajax method=POST>"
-								+"<input type=hidden value="+data.realuploadpath+">"
+								+"<input type=hidden name=realuploadpath value="+data.realuploadpath+">"
 										+ "<input type=submit value="+data.originalfilename+">"+ 
 										"</td>"
 										+ "<td>" + data.uploaddate

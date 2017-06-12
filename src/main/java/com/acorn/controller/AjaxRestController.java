@@ -142,10 +142,12 @@ public class AjaxRestController {
 	@RequestMapping("downloadajax")
 	public ResponseEntity<byte[]> download(String realuploadpath)throws Exception{
 		
-		
+		log.info("들어오는 업로드패스:"+realuploadpath);
+		log.info("들어오는타입값:"+realuploadpath.substring(
+				realuploadpath.lastIndexOf(".")+1));
 		String type = realuploadpath.substring(
 				realuploadpath.lastIndexOf(".")+1);
-		String fname = realuploadpath.substring(realuploadpath.lastIndexOf("_"));
+		
 		MediaType mtype;
 		ResponseEntity<byte[]> entity = null;
 		File f = new File(realuploadpath);

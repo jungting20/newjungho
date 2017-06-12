@@ -31,7 +31,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.test.test,com.acorn.controller" />
-	
+	<context:component-scan base-package="com.acorn.controlleradvice"/>
 	
 	
 	<beans:bean id="basicinterceptor" class="com.interceptor.BasicInterCeptor"/>
@@ -56,6 +56,9 @@
 		<mvc:mapping path="/member/doattend"/>
 		<mvc:mapping path="/member/myattendancecheck"/>
 		<mvc:mapping path="/board/boardwriteform"/>
+		<mvc:mapping path="/board/fileupload"/>
+		<mvc:mapping path="/board/boardlist"/>
+		<mvc:mapping path="/member/memberlist"/>
 		<beans:ref bean="LoginAuthInterCeptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
