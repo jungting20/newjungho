@@ -36,7 +36,7 @@ public class FileUploadDAO {
 		dto.setBinfo(bi);
 		dto.setTotalcount(session.selectOne("getfilecount"));
 		dto.setFlist(session.selectList("getfilelist", bi));
-		log.info("뭐가나오지:"+session.selectList("getfilelist", bi).size());
+		
 		return dto;
 	}
 	

@@ -27,6 +27,7 @@ public class UploadUtil {
 		map.put("PNG", MediaType.IMAGE_PNG);
 		map.put("GIF", MediaType.IMAGE_GIF);
 		map.put("JPEG", MediaType.IMAGE_JPEG);
+		map.put("JPG", MediaType.IMAGE_JPEG);
 		
 	}
 	public static  MediaType getmediatype(String type) {

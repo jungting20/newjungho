@@ -146,7 +146,7 @@ public class AjaxRestController {
 		log.info("들어오는타입값:"+realuploadpath.substring(
 				realuploadpath.lastIndexOf(".")+1));
 		String type = realuploadpath.substring(
-				realuploadpath.lastIndexOf(".")+1);
+				realuploadpath.lastIndexOf(".")+1).toUpperCase();
 		
 		MediaType mtype;
 		ResponseEntity<byte[]> entity = null;
