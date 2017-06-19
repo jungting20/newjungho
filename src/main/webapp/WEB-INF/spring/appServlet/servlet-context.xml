@@ -53,12 +53,17 @@
 		<beans:ref bean="loginformInterceptor"/>
 	</mvc:interceptor>
 		<mvc:interceptor>
+		<mvc:mapping path="/member/doattendform"/>
 		<mvc:mapping path="/member/doattend"/>
 		<mvc:mapping path="/member/myattendancecheck"/>
-		<mvc:mapping path="/board/boardwriteform"/>
-		<mvc:mapping path="/board/fileupload"/>
-		<mvc:mapping path="/board/boardlist"/>
+		<mvc:mapping path="/member/studentattendancelist"/>
+		<mvc:mapping path="/member/todayabsence"/>
+		<mvc:mapping path="/member/myinfo"/>
 		<mvc:mapping path="/member/memberlist"/>
+		<mvc:mapping path="/member/readarticle"/>
+		<mvc:mapping path="/member/setreadarticle"/>
+		<mvc:mapping path="/board/*"/>
+		<mvc:mapping path="/ajax/*"/>
 		<beans:ref bean="LoginAuthInterCeptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -29,7 +29,7 @@ public class LoginAuthInterCeptor extends HandlerInterceptorAdapter{
 		
 		if(session.getAttribute("userid") == null){
 			FlashMap map = new FlashMap();
-			map.put("msg", "로그인 하세요");
+			map.put("mesg", "로그인 하세요");
 			FlashMapManager fm = RequestContextUtils.getFlashMapManager(request);
 			fm.saveOutputFlashMap(map, request, response);
 			
