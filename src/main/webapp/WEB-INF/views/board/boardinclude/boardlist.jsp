@@ -83,6 +83,7 @@ $(document).ready(function () {
 		<input type="submit" value="검색">
 		<input type="hidden" value=1 name="page">
 		<input type="hidden" value=10 name="perpagelist">
+		<input type="hidden" value='${dto.binfo.category}' name="category">
 		</form>
 		
 	</div>

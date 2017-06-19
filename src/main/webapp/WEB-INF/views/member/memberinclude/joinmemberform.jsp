@@ -26,16 +26,19 @@ $(document).ready(function(){
 
 $("#ck").on("click",function(){
 	
+	
+	
 	$.ajax({
 		type: "get",
-		url:"../ajax/idcheck",
-		data: {
-			v1:$("#id").val()
-		},
+		url:"../ajax/idcheck/"+$("#id").val(),
+		/* data: {
+			id:$("#id").val()
+		}, */
 		dataType:"text",
 		success: function(responseData, status, xhr){
 			
-			if(parseInt(responseData)==1){
+			
+			if(parseInt(responseData) == 1){
 				alert('이미존재하는 아이디입니다');
 					
 			}else{

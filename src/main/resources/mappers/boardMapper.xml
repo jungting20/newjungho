@@ -19,6 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and writer_id like '%'||#{search}||'%'
 			</if>
 		</if>
+		
+		
 
 
 </sql>
@@ -32,19 +34,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getboardlist" resultType="boardDTO">
-
+	
+	<![CDATA[
 		select id,title,writer_id,content,filepath,category,
 		written_date,readcnt
 		from (select
 		id,title,writer_id,content,filepath,category,written_date,
 		readcnt,
-		row_number()over(order by id desc) as rank from board where id > 0 
+		row_number()over(order by id desc) as rank from board where id > 0 and 
+		category=#{category}
+		]]>
 		<include refid="search"></include>) 
 		where rank
 		between #{start} and #{end}
 		
+		
+		
 
 	</select>
+	
+
 	
 	<insert id="addboard">
 	

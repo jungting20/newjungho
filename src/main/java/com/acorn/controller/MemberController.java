@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.dto.LoginDTO;
@@ -55,11 +56,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="joinmemberform",method=RequestMethod.POST)
-	public String joinmember(MemberDTO dto){
+	public String joinmember(MemberDTO dto,RedirectAttributes rttr) throws Exception{
 		
-		
-		
-		return null;
+		service.joinstudent(dto);
+		rttr.addFlashAttribute("mesg", "회원가입이 신청이 완료되었습니다");
+		return "redirect:loginform";
 	}
 	
 	@RequestMapping(value="doattendform",method=RequestMethod.GET)

@@ -30,7 +30,7 @@
 				class="form-control" id="pw" placeholder="비밀번호" name="passwd">
 		</div>
 		<button type="submit" class="btn btn-primary" id="submit">로그인</button>
-		<a href="joinmemberform.jsp" role="button" class="btn btn-warning">회원가입</a>
+		<a href="joinmemberform" role="button" class="btn btn-warning">회원가입</a>
 		<div class="checkbox">
 			<label><input type="checkbox" value="autologin" name="isautologin">자동 로그인</label>
 		</div>

@@ -133,4 +133,17 @@ public class MemberDAO {
 		session.update("updatearticlecategory", dto);
 	}
 	
+	public void joinstudent(MemberDTO dto)throws Exception{
+		
+		
+		session.insert("joinstudent", dto);
+	}
+	
+	public int checkid(String id)throws Exception{
+		
+		
+		return session.selectOne("checkid", id); 
+		
+	}
+	
 }

@@ -23,12 +23,12 @@ public class BoardDAO {
 	public BoardpageDTO getboardlist(BoardinfoforlistDTO bi) throws Exception{
 		
 		BoardpageDTO dto = new BoardpageDTO();
-		log.info("숫자는 못직나:"+bi.getPage() + bi.getPerpagelist() + bi.getStart()+bi.getEnd());
+		log.info("숫자는 못직나:"+"페이지:"+bi.getPage() + 
+				"보여줄개수:"+bi.getPerpagelist() + "스타트페이지"+bi.getStart()+"엔드페이지"+bi.getEnd());
 		log.info("갯수몇개?:"+session.selectOne("getboardcount",bi));
 		dto.setBinfo(bi);
 		dto.setTotalcount(session.selectOne("getboardcount",bi));
 		dto.setList(session.selectList("getboardlist", bi));
-		
 		log.info("스타트페이지:"+dto.getStartpage());
 		
 		return dto;

@@ -122,6 +122,7 @@ public class BoardpageDTO {
 		UriComponents uri = UriComponentsBuilder.newInstance()
 				.queryParam("search", dto.getSearch())
 				.queryParam("searchtype", dto.getSearchtype())
+				.queryParam("category", dto.getCategory())
 				.build();
 		
 		return uri.toUriString();

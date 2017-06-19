@@ -81,6 +81,11 @@ select * from student
 
 </select>
 
+<select id="checkid" resultType="int">
+	select count(*) from student where id = #{id}
+
+</select>
+
 <select id="getattendancedate" resultType="attendanceDTO">
 
 select to_char(course_date,'YYYY-MM-DD') as course_date from attendance where to_char(course_date,'MM') = to_char(sysdate,'MM')  
@@ -119,7 +124,10 @@ where confirmation = 0
 	insert into attendance values(attendance_seq.nextval,#{memberid},
 	(select course_id from register where student_id =#{memberid}),
 	to_char(sysdate,'HH24:Mi:SS'),to_date(sysdate,'yy/mm/dd'))
-</insert>	
+</insert>
+<insert id = "joinstudent">
+ insert into student(id,name,birthdate,password,gender,phone_num,email,confirmation) values (#{id},#{name},to_date(#{birthdate},'YY/MM/DD'),#{password},#{gender},#{phone_num},#{email},0)
+ </insert>
 <!-- 내 정보 수정 -->
 <update id="updatemyinfo" >
 	

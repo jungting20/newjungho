@@ -9,8 +9,38 @@ public class BoardinfoforlistDTO {
 	private int perpagelist;
 	private String search;
 	private String searchtype;
+	private String category;
 	
 	
+	
+	
+	@Override
+	public String toString() {
+		return "BoardinfoforlistDTO [page=" + page + ", perpagelist=" + perpagelist + ", search=" + search
+				+ ", searchtype=" + searchtype + ", category=" + category + "]";
+	}
+
+
+	public BoardinfoforlistDTO(int page, int perpagelist, String search, String searchtype, String category) {
+		super();
+		this.page = page;
+		this.perpagelist = perpagelist;
+		this.search = search;
+		this.searchtype = searchtype;
+		this.category = category;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
 	public BoardinfoforlistDTO() {
 		this.page = 1;
 		this.perpagelist = 10;

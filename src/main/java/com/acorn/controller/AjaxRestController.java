@@ -168,6 +168,17 @@ public class AjaxRestController {
 		return entity;
 	}
 	
+	@RequestMapping("idcheck/{id}")
+	public int checkid(@PathVariable("id") String id) throws Exception{
+		
+		System.out.println("아이디:"+id);
+		
+		
+		return service.checkid(id);
+	}
+	
+	
+	
 
 	
 	

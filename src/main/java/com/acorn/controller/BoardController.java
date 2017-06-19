@@ -35,7 +35,7 @@ public class BoardController {
 		
 		
 		
-		System.out.println("list 사이즈:"+service.getboardlist(dto).getList().size());
+		System.out.println("카테고리뭐들어옴"+dto.getCategory());
 		m.addAttribute("dto", service.getboardlist(dto));
 		
 		

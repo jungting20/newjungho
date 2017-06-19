@@ -78,9 +78,9 @@
 				<h4>회원관리시스템</h4>
 				<ul class="nav nav-pills nav-stacked">
 
-					<li class="active"><a href="BoardList?cate=공지사항">공지사항</a></li>
+					<li class="active"><a href="../board/boardlist?category=공지사항">공지사항</a></li>
 
-					<li><a href="../board/boardlist">자유게시판</a></li>
+					<li><a href="../board/boardlist?category=free">자유게시판</a></li>
 					<li><a href="CourseSchedule">강의관리</a></li>
 					<c:if test="${userid != null && userid.classification == 'student'}">
 					<li><a href="../member/myinfo">내정보</a></li>
@@ -89,10 +89,7 @@
 					<li><a href="../member/memberlist?mem=student">모든학생보기</a></li>
 					<li><a href="../member/memberlist?mem=teacher">모든선생님보기</a></li>
 					<li><a href="../member/memberlist?mem=watinglist" id="wating">가입대기자보기 </a></li>
-					<li><a href="GoProhibit">게시판금지어설정</a>
 					</c:if>
-					
-					<li><a href="CourseList">강의목록</a></li>
 					<li><a href="../board/fileupload">자료게시판</a>
 					<c:if test="${userid != null }">
 					<li><a href="../member/readarticle">오늘의뉴스</a></li>

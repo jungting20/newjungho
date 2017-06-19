@@ -171,4 +171,15 @@ public class MemberService {
 		dao.updatearticlecategory(dto);
 	}
 
+	public void joinstudent(MemberDTO dto) throws Exception {
+
+		dao.joinstudent(dto);
+	}
+
+	public int checkid(String id) throws Exception {
+
+		return dao.checkid(id);
+
+	}
+
 }
