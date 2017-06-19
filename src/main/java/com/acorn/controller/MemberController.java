@@ -47,6 +47,21 @@ public class MemberController {
 		
 		
 	}
+	
+	@RequestMapping(value="joinmemberform",method=RequestMethod.GET)
+	public void joinmemberform(){
+		
+		
+	}
+	
+	@RequestMapping(value="joinmemberform",method=RequestMethod.POST)
+	public String joinmember(MemberDTO dto){
+		
+		
+		
+		return null;
+	}
+	
 	@RequestMapping(value="doattendform",method=RequestMethod.GET)
 	public void loginsuccess(){
 		//출석체크버튼을 누르기위한 창으로 이동
